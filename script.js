@@ -1,70 +1,84 @@
-// Dropdown Toggle Functionality
-document.querySelectorAll('.select-box').forEach(box => {
-    box.addEventListener('click', function() {
-        const select = this.querySelector('.select');
-        const options = this.querySelector('.select-options');
-        const isOpen = options.style.display === 'block';
-        document.querySelectorAll('.select-options').forEach(opt => opt.style.display = 'none');
-        options.style.display = isOpen ? 'none' : 'block';
-        select.classList.toggle('opened', !isOpen);
-    });
-});
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Time Comparison: Major Cities</title>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Header with Logo and Title -->
+    <header>
+        <svg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="50" cy="50" r="40" stroke="var(--accent-color)" stroke-width="10" fill="none" />
+            <text x="50%" y="50%" text-anchor="middle" fill="var(--accent-color)" font-size="24" font-family="Arial" dy=".3em">Time</text>
+        </svg>
+        <h1>Current Time in Major Cities</h1>
+    </header>
 
-// Dropdown Option Selection
-document.querySelectorAll('.select-option').forEach(option => {
-    option.addEventListener('click', function() {
-        const selectBox = this.closest('.select-box');
-        const select = selectBox.querySelector('.select');
-        const options = selectBox.querySelectorAll('.select-option');
-        options.forEach(opt => opt.classList.remove('selected'));
-        this.classList.add('selected');
-        select.textContent = this.textContent;
-        select.classList.remove('opened');
-        updateTime(document.getElementById('time-slider').value);
-    });
-});
+    <!-- City Picker Section -->
+    <div class="city-picker">
+        <!-- Dropdown for City 1 -->
+        <div class="select-box">
+            <div class="select" id="city1-select">Washington</div>
+            <div class="select-options">
+                <div class="select-option selected" data-value="America/New_York">Washington</div>
+                <div class="select-option" data-value="Europe/Berlin">Berlin</div>
+                <div class="select-option" data-value="America/New_York">New York</div>
+                <div class="select-option" data-value="Europe/London">London</div>
+                <div class="select-option" data-value="Europe/Athens">Athens</div>
+                <div class="select-option" data-value="America/Guayaquil">Quito</div>
+                <div class="select-option" data-value="America/Los_Angeles">Los Angeles</div>
+            </div>
+        </div>
+        <!-- Dropdown for City 2 -->
+        <div class="select-box">
+            <div class="select" id="city2-select">Berlin</div>
+            <div class="select-options">
+                <div class="select-option selected" data-value="Europe/Berlin">Berlin</div>
+                <div class="select-option" data-value="America/New_York">Washington</div>
+                <div class="select-option" data-value="America/New_York">New York</div>
+                <div class="select-option" data-value="Europe/London">London</div>
+                <div class="select-option" data-value="Europe/Athens">Athens</div>
+                <div class="select-option" data-value="America/Guayaquil">Quito</div>
+                <div class="select-option" data-value="America/Los_Angeles">Los Angeles</div>
+            </div>
+        </div>
+    </div>
 
-// Update Time Based on Selected Cities and Slider Value
-function updateTime(sliderValue) {
-    const city1TimeElement = document.getElementById('city1-time');
-    const city2TimeElement = document.getElementById('city2-time');
-    
-    const city1Select = document.getElementById('city1-select');
-    const city2Select = document.getElementById('city2-select');
-    
-    const city1TimeZone = document.querySelector('.select-box:nth-child(1) .select-option.selected').getAttribute('data-value');
-    const city2TimeZone = document.querySelector('.select-box:nth-child(2) .select-option.selected').getAttribute('data-value');
-    
-    const now = new Date();
-    now.setHours(sliderValue);
-    
-    const city1Time = new Date(now.toLocaleString('en-US', { timeZone: city1TimeZone }));
-    const city2Time = new Date(now.toLocaleString('en-US', { timeZone: city2TimeZone }));
-    
-    city1TimeElement.textContent = city1Time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    city2TimeElement.textContent = city2Time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
-    document.getElementById('city1-name').textContent = city1Select.textContent;
-    document.getElementById('city2-name').textContent = city2Select.textContent;
-}
+    <!-- Time Display Section -->
+    <div class="time-container">
+        <!-- Time Box for City 1 -->
+        <div class="time-box">
+            <h2 id="city1-name">Washington</h2>
+            <p id="city1-time">Loading...</p>
+        </div>
+        <!-- Time Box for City 2 -->
+        <div class="time-box">
+            <h2 id="city2-name">Berlin</h2>
+            <p id="city2-time">Loading...</p>
+        </div>
+    </div>
 
-// Slider Event Listener
-document.getElementById('time-slider').addEventListener('input', function() {
-    updateTime(this.value);
-});
+    <!-- Time Slider -->
+    <div class="slider-container">
+        <input type="range" id="time-slider" min="0" max="24" value="12">
+    </div>
 
-// Dark Mode Toggle Event Listener
-document.getElementById('dark-mode-toggle').addEventListener('change', function() {
-    document.body.classList.toggle('dark-mode', this.checked);
-});
+    <!-- Reset Button -->
+    <div class="reset-container">
+        <button class="reset-button" id="reset-button">Reset to Current Time</button>
+    </div>
 
-// Reset Button Event Listener
-document.getElementById('reset-button').addEventListener('click', function() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    document.getElementById('time-slider').value = currentHour;
-    updateTime(currentHour);
-});
-
-// Initial Call to Set Default Time
-updateTime(12);
+    <!-- Dark Mode Toggle -->
+    <div class="toggle-container">
+        <label class="switch">
+            <input type="checkbox" id="dark-mode-toggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+    
+    <script src="script.js"></script>
+</body>
+</html>
