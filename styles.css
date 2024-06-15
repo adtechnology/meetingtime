@@ -17,13 +17,13 @@ body {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    height: 100vh;
+    min-height: 100vh;
     margin: 0;
     background-color: var(--background-light);
     color: var(--text-light);
     transition: background-color 0.3s, color 0.3s;
-    position: relative;
     padding: 20px;
+    box-sizing: border-box;
 }
 
 header {
@@ -34,14 +34,16 @@ header {
 }
 
 header svg {
-    width: 100px;
-    height: 100px;
+    width: 80px;
+    height: 80px;
 }
 
 h1 {
     color: var(--text-light);
     font-weight: 700;
     text-align: center;
+    font-size: 1.5em;
+    margin: 10px 0;
 }
 
 .time-container {
@@ -62,16 +64,18 @@ h1 {
     transition: background-color 0.3s, color 0.3s;
     margin: 10px;
     flex: 1 1 45%;
+    box-sizing: border-box;
 }
 
 .time-box h2 {
     margin: 0 0 10px;
     color: var(--text-light);
     font-weight: 500;
+    font-size: 1.2em;
 }
 
 .time-box p {
-    font-size: 1.5em;
+    font-size: 1.2em;
     margin: 0;
     color: var(--text-light);
     font-weight: 400;
@@ -81,6 +85,7 @@ h1 {
     width: 100%;
     max-width: 600px;
     margin: 20px 0;
+    box-sizing: border-box;
 }
 
 .slider-container input[type="range"] {
@@ -208,8 +213,9 @@ input:checked + .slider:before {
 .select-box {
     position: relative;
     display: inline-block;
-    width: 45%;
-    margin: 10px 5px;
+    width: 100%;
+    margin: 10px 0;
+    box-sizing: border-box;
 }
 
 .select-box select {
@@ -266,14 +272,4 @@ input:checked + .slider:before {
 .select-box .select-options .select-option.selected {
     background: var(--accent-color);
     color: #fff;
-}
-
-@media (max-width: 600px) {
-    .select-box {
-        width: 100%;
-        margin: 5px 0;
-    }
-    .time-box {
-        flex: 1 1 100%;
-    }
 }
