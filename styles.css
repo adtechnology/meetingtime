@@ -263,7 +263,7 @@ input:checked + .slider:before {
 }
 
 .select-box .select::after {
-    content: '\\25BC';
+    content: '▼';
     position: absolute;
     right: 15px;
     top: 50%;
