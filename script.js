@@ -36,7 +36,7 @@ function updateTime(sliderValue) {
     const city2TimeZone = document.querySelector('.select-box:nth-child(2) .select-option.selected').getAttribute('data-value');
     
     const now = new Date();
-    now.setHours(sliderValue);
+    now.setHours(parseInt(sliderValue, 10));
     
     const city1Time = new Date(now.toLocaleString('en-US', { timeZone: city1TimeZone }));
     const city2Time = new Date(now.toLocaleString('en-US', { timeZone: city2TimeZone }));
