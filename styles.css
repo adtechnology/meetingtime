@@ -301,3 +301,16 @@ input:checked + .slider:before {
     background: var(--accent-color);
     color: #fff;
 }
+
+/* Hide the default arrow in the select box */
+.select-box select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
+
+.select-box .select {
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+}
