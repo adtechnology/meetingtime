@@ -3,82 +3,192 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Time Comparison: Major Cities</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@400;500;700&display=swap">
+    <title>World Time Comparison</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-    <!-- Header with Logo and Title -->
-    <header>
-        <svg width="80" height="80" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg">
-            <circle cx="50" cy="50" r="40" stroke="var(--accent-color)" stroke-width="10" fill="none" />
-            <text x="50%" y="50%" text-anchor="middle" fill="var(--accent-color)" font-size="20" font-family="Arial" dy=".3em">Time</text>
-        </svg>
-        <h1>Current Time in Major Cities</h1>
-    </header>
-
-    <!-- City Picker Section -->
-    <div class="city-picker">
-        <!-- Dropdown for City 1 -->
-        <div class="select-box">
-            <div class="select" id="city1-select">Washington</div>
-            <div class="select-options">
-                <div class="select-option selected" data-value="America/New_York">Washington</div>
-                <div class="select-option" data-value="Europe/Berlin">Berlin</div>
-                <div class="select-option" data-value="America/New_York">New York</div>
-                <div class="select-option" data-value="Europe/London">London</div>
-                <div class="select-option" data-value="Europe/Athens">Athens</div>
-                <div class="select-option" data-value="America/Guayaquil">Quito</div>
-                <div class="select-option" data-value="America/Los_Angeles">Los Angeles</div>
-            </div>
-        </div>
-        <!-- Dropdown for City 2 -->
-        <div class="select-box">
-            <div class="select" id="city2-select">Berlin</div>
-            <div class="select-options">
-                <div class="select-option selected" data-value="Europe/Berlin">Berlin</div>
-                <div class="select-option" data-value="America/New_York">Washington</div>
-                <div class="select-option" data-value="America/New_York">New York</div>
-                <div class="select-option" data-value="Europe/London">London</div>
-                <div class="select-option" data-value="Europe/Athens">Athens</div>
-                <div class="select-option" data-value="America/Guayaquil">Quito</div>
-                <div class="select-option" data-value="America/Los_Angeles">Los Angeles</div>
-            </div>
-        </div>
-    </div>
-
-    <!-- Time Display Section -->
-    <div class="time-container">
-        <!-- Time Box for City 1 -->
-        <div class="time-box">
-            <h2 id="city1-name">Washington</h2>
-            <p id="city1-time">Loading...</p>
-        </div>
-        <!-- Time Box for City 2 -->
-        <div class="time-box">
-            <h2 id="city2-name">Berlin</h2>
-            <p id="city2-time">Loading...</p>
-        </div>
-    </div>
-
-    <!-- Time Slider -->
+<div class="container">
+    <h1>World Time Comparison</h1>
+    <div id="cityTimes"></div>
     <div class="slider-container">
-        <input type="range" id="time-slider" min="0" max="24" value="12">
+        <span class="slider-label">-720m</span>
+        <input type="range" id="timeSlider" min="-720" max="720" value="0" step="1">
+        <span class="slider-label">+720m</span>
     </div>
-
-    <!-- Reset Button -->
-    <div class="reset-container">
-        <button class="reset-button" id="reset-button">Reset to Current Time</button>
+    <div class="options">
+        <button id="resetButton">Reset to Current Time</button>
+        <select id="extraCity">
+            <option value="">Add Extra City</option>
+            <optgroup label="UTC-12:00">
+                <option value="Pacific/Wake">Wake Island</option>
+            </optgroup>
+            <optgroup label="UTC-11:00">
+                <option value="Pacific/Pago_Pago">Pago Pago</option>
+                <option value="Pacific/Niue">Alofi</option>
+            </optgroup>
+            <optgroup label="UTC-10:00">
+                <option value="Pacific/Honolulu">Honolulu</option>
+                <option value="Pacific/Tahiti">Papeete</option>
+            </optgroup>
+            <optgroup label="UTC-09:00">
+                <option value="America/Anchorage">Anchorage</option>
+                <option value="Pacific/Gambier">Gambier Islands</option>
+            </optgroup>
+            <optgroup label="UTC-08:00">
+                <option value="America/Los_Angeles">Los Angeles</option>
+                <option value="America/Vancouver">Vancouver</option>
+                <option value="Pacific/Pitcairn">Pitcairn Islands</option>
+            </optgroup>
+            <optgroup label="UTC-07:00">
+                <option value="America/Denver">Denver</option>
+                <option value="America/Phoenix">Phoenix</option>
+                <option value="America/Edmonton">Edmonton</option>
+            </optgroup>
+            <optgroup label="UTC-06:00">
+                <option value="America/Chicago">Chicago</option>
+                <option value="America/Mexico_City">Mexico City</option>
+                <option value="America/Costa_Rica">San José</option>
+            </optgroup>
+            <optgroup label="UTC-05:00">
+                <option value="America/New_York">New York</option>
+                <option value="America/Toronto">Toronto</option>
+                <option value="America/Lima">Lima</option>
+            </optgroup>
+            <optgroup label="UTC-04:00">
+                <option value="America/Halifax">Halifax</option>
+                <option value="America/Caracas">Caracas</option>
+                <option value="America/Santiago">Santiago</option>
+            </optgroup>
+            <optgroup label="UTC-03:00">
+                <option value="America/Sao_Paulo">São Paulo</option>
+                <option value="America/Argentina/Buenos_Aires">Buenos Aires</option>
+                <option value="America/Godthab">Nuuk</option>
+            </optgroup>
+            <optgroup label="UTC-02:00">
+                <option value="Atlantic/South_Georgia">South Georgia Island</option>
+            </optgroup>
+            <optgroup label="UTC-01:00">
+                <option value="Atlantic/Azores">Azores</option>
+                <option value="Atlantic/Cape_Verde">Praia</option>
+            </optgroup>
+            <optgroup label="UTC+00:00">
+                <option value="Europe/London">London</option>
+                <option value="Africa/Casablanca">Casablanca</option>
+                <option value="Europe/Dublin">Dublin</option>
+            </optgroup>
+            <optgroup label="UTC+01:00">
+                <option value="Europe/Paris">Paris</option>
+                <option value="Europe/Berlin">Berlin</option>
+                <option value="Africa/Lagos">Lagos</option>
+            </optgroup>
+            <optgroup label="UTC+02:00">
+                <option value="Europe/Athens">Athens</option>
+                <option value="Africa/Cairo">Cairo</option>
+                <option value="Africa/Johannesburg">Johannesburg</option>
+            </optgroup>
+            <optgroup label="UTC+03:00">
+                <option value="Europe/Moscow">Moscow</option>
+                <option value="Asia/Riyadh">Riyadh</option>
+                <option value="Africa/Nairobi">Nairobi</option>
+            </optgroup>
+            <optgroup label="UTC+03:30">
+                <option value="Asia/Tehran">Tehran</option>
+            </optgroup>
+            <optgroup label="UTC+04:00">
+                <option value="Asia/Dubai">Dubai</option>
+                <option value="Asia/Baku">Baku</option>
+                <option value="Indian/Mauritius">Port Louis</option>
+            </optgroup>
+            <optgroup label="UTC+04:30">
+                <option value="Asia/Kabul">Kabul</option>
+            </optgroup>
+            <optgroup label="UTC+05:00">
+                <option value="Asia/Karachi">Karachi</option>
+                <option value="Asia/Tashkent">Tashkent</option>
+                <option value="Asia/Yekaterinburg">Yekaterinburg</option>
+            </optgroup>
+            <optgroup label="UTC+05:30">
+                <option value="Asia/Colombo">Colombo</option>
+                <option value="Asia/Kolkata">New Delhi</option>
+            </optgroup>
+            <optgroup label="UTC+05:45">
+                <option value="Asia/Kathmandu">Kathmandu</option>
+            </optgroup>
+            <optgroup label="UTC+06:00">
+                <option value="Asia/Dhaka">Dhaka</option>
+                <option value="Asia/Almaty">Almaty</option>
+                <option value="Asia/Omsk">Omsk</option>
+            </optgroup>
+            <optgroup label="UTC+06:30">
+                <option value="Asia/Yangon">Yangon</option>
+            </optgroup>
+            <optgroup label="UTC+07:00">
+                <option value="Asia/Bangkok">Bangkok</option>
+                <option value="Asia/Jakarta">Jakarta</option>
+                <option value="Asia/Krasnoyarsk">Krasnoyarsk</option>
+            </optgroup>
+            <optgroup label="UTC+08:00">
+                <option value="Asia/Shanghai">Shanghai</option>
+                <option value="Asia/Singapore">Singapore</option>
+                <option value="Australia/Perth">Perth</option>
+            </optgroup>
+            <optgroup label="UTC+08:45">
+                <option value="Australia/Eucla">Eucla</option>
+            </optgroup>
+            <optgroup label="UTC+09:00">
+                <option value="Asia/Tokyo">Tokyo</option>
+                <option value="Asia/Seoul">Seoul</option>
+                <option value="Asia/Irkutsk">Irkutsk</option>
+            </optgroup>
+            <optgroup label="UTC+09:30">
+                <option value="Australia/Darwin">Darwin</option>
+                <option value="Australia/Adelaide">Adelaide</option>
+            </optgroup>
+            <optgroup label="UTC+10:00">
+                <option value="Australia/Sydney">Sydney</option>
+                <option value="Australia/Brisbane">Brisbane</option>
+                <option value="Pacific/Guam">Guam</option>
+            </optgroup>
+            <optgroup label="UTC+10:30">
+                <option value="Australia/Lord_Howe">Lord Howe Island</option>
+            </optgroup>
+            <optgroup label="UTC+11:00">
+                <option value="Asia/Vladivostok">Vladivostok</option>
+                <option value="Pacific/Noumea">Noumea</option>
+            </optgroup>
+            <optgroup label="UTC+12:00">
+                <option value="Pacific/Auckland">Auckland</option>
+                <option value="Pacific/Fiji">Suva</option>
+                <option value="Asia/Kamchatka">Petropavlovsk-Kamchatsky</option>
+            </optgroup>
+            <optgroup label="UTC+12:45">
+                <option value="Pacific/Chatham">Chatham Islands</option>
+            </optgroup>
+            <optgroup label="UTC+13:00">
+                <option value="Pacific/Tongatapu">Nuku'alofa</option>
+                <option value="Pacific/Apia">Apia</option>
+            </optgroup>
+            <optgroup label="UTC+14:00">
+                <option value="Pacific/Kiritimati">Kiritimati</option>
+            </optgroup>
+        </select>
     </div>
-
-    <!-- Dark Mode Toggle -->
     <div class="toggle-container">
-        <label class="switch">
-            <input type="checkbox" id="dark-mode-toggle">
+        <span class="toggle-label">24-hour format</span>
+        <label class="toggle">
+            <input type="checkbox" id="formatToggle">
             <span class="slider"></span>
         </label>
     </div>
-    
-    <script src="script.js"></script>
+    <div class="toggle-container">
+        <span class="toggle-label">Override System Dark Mode</span>
+        <label class="toggle">
+            <input type="checkbox" id="darkModeToggle">
+            <span class="slider"></span>
+        </label>
+    </div>
+</div>
+<script src="script.js"></script>
 </body>
 </html>

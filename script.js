@@ -1,70 +1,128 @@
-// Dropdown Toggle Functionality
-document.querySelectorAll('.select-box').forEach(box => {
-    box.addEventListener('click', function() {
-        const select = this.querySelector('.select');
-        const options = this.querySelector('.select-options');
-        const isOpen = options.style.display === 'block';
-        document.querySelectorAll('.select-options').forEach(opt => opt.style.display = 'none');
-        options.style.display = isOpen ? 'none' : 'block';
-        select.classList.toggle('opened', !isOpen);
-    });
-});
+let cities = ['New York', 'Berlin', 'Athens', 'Quito', 'Washington'];
+let timezones = ['America/New_York', 'Europe/Berlin', 'Europe/Athens', 'America/Guayaquil', 'America/New_York'];
+let offsetMinutes = 0;
+let use24HourFormat = false;
+let darkModeOverride = false;
 
-// Dropdown Option Selection
-document.querySelectorAll('.select-option').forEach(option => {
-    option.addEventListener('click', function() {
-        const selectBox = this.closest('.select-box');
-        const select = selectBox.querySelector('.select');
-        const options = selectBox.querySelectorAll('.select-option');
-        options.forEach(opt => opt.classList.remove('selected'));
-        this.classList.add('selected');
-        select.textContent = this.textContent;
-        select.classList.remove('opened');
-        updateTime(document.getElementById('time-slider').value);
-    });
-});
+function updateTimes() {
+    const cityTimesDiv = document.getElementById('cityTimes');
+    cityTimesDiv.innerHTML = '';
 
-// Update Time Based on Selected Cities and Slider Value
-function updateTime(sliderValue) {
-    const city1TimeElement = document.getElementById('city1-time');
-    const city2TimeElement = document.getElementById('city2-time');
-    
-    const city1Select = document.getElementById('city1-select');
-    const city2Select = document.getElementById('city2-select');
-    
-    const city1TimeZone = document.querySelector('.select-box:nth-child(1) .select-option.selected').getAttribute('data-value');
-    const city2TimeZone = document.querySelector('.select-box:nth-child(2) .select-option.selected').getAttribute('data-value');
-    
-    const now = new Date();
-    now.setHours(parseInt(sliderValue, 10));
-    
-    const city1Time = new Date(now.toLocaleString('en-US', { timeZone: city1TimeZone }));
-    const city2Time = new Date(now.toLocaleString('en-US', { timeZone: city2TimeZone }));
-    
-    city1TimeElement.textContent = city1Time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    city2TimeElement.textContent = city2Time.toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' });
-    
-    document.getElementById('city1-name').textContent = city1Select.textContent;
-    document.getElementById('city2-name').textContent = city2Select.textContent;
+    cities.forEach((city, index) => {
+        const date = new Date();
+        date.setMinutes(date.getMinutes() + offsetMinutes);
+        const options = {
+            timeZone: timezones[index],
+            hour: '2-digit',
+            minute: '2-digit',
+            hour12: !use24HourFormat
+        };
+        const timeString = date.toLocaleTimeString('en-US', options);
+
+        const cityTimeDiv = document.createElement('div');
+        cityTimeDiv.className = 'city-time';
+        cityTimeDiv.innerHTML = `
+            <span class="city">${city}</span>
+            <span class="time">${timeString}</span>
+        `;
+        cityTimesDiv.appendChild(cityTimeDiv);
+    });
 }
 
-// Slider Event Listener
-document.getElementById('time-slider').addEventListener('input', function() {
-    updateTime(this.value);
+function saveSettings() {
+    localStorage.setItem('offsetMinutes', offsetMinutes);
+    localStorage.setItem('use24HourFormat', use24HourFormat);
+    localStorage.setItem('darkModeOverride', darkModeOverride);
+    localStorage.setItem('extraCity', document.getElementById('extraCity').value);
+}
+
+function loadSettings() {
+    offsetMinutes = parseInt(localStorage.getItem('offsetMinutes')) || 0;
+    use24HourFormat = localStorage.getItem('use24HourFormat') === 'true';
+    darkModeOverride = localStorage.getItem('darkModeOverride') === 'true';
+    const extraCity = localStorage.getItem('extraCity');
+
+    document.getElementById('timeSlider').value = offsetMinutes;
+    document.getElementById('formatToggle').checked = use24HourFormat;
+    document.getElementById('darkModeToggle').checked = darkModeOverride;
+    document.getElementById('extraCity').value = extraCity || '';
+
+    if (extraCity) {
+        addExtraCity(extraCity);
+    }
+
+    updateDarkMode();
+}
+
+function addExtraCity(timezone) {
+    const cityName = timezone.split('/').pop().replace('_', ' ');
+    cities.push(cityName);
+    timezones.push(timezone);
+    updateTimes();
+}
+
+function updateDarkMode() {
+    if (darkModeOverride) {
+        document.body.classList.add('dark-mode');
+    } else {
+        document.body.classList.remove('dark-mode');
+    }
+}
+
+const slider = document.getElementById('timeSlider');
+slider.addEventListener('input', (e) => {
+    offsetMinutes = parseInt(e.target.value);
+    updateTimes();
+    saveSettings();
 });
 
-// Dark Mode Toggle Event Listener
-document.getElementById('dark-mode-toggle').addEventListener('change', function() {
-    document.body.classList.toggle('dark-mode', this.checked);
+const resetButton = document.getElementById('resetButton');
+resetButton.addEventListener('click', () => {
+    offsetMinutes = 0;
+    slider.value = 0;
+    updateTimes();
+    saveSettings();
 });
 
-// Reset Button Event Listener
-document.getElementById('reset-button').addEventListener('click', function() {
-    const now = new Date();
-    const currentHour = now.getHours();
-    document.getElementById('time-slider').value = currentHour;
-    updateTime(currentHour);
+const formatToggle = document.getElementById('formatToggle');
+formatToggle.addEventListener('change', (e) => {
+    use24HourFormat = e.target.checked;
+    updateTimes();
+    saveSettings();
 });
 
-// Initial Call to Set Default Time
-updateTime(12);
+const darkModeToggle = document.getElementById('darkModeToggle');
+darkModeToggle.addEventListener('change', (e) => {
+    darkModeOverride = e.target.checked;
+    updateDarkMode();
+    saveSettings();
+});
+
+const extraCitySelect = document.getElementById('extraCity');
+extraCitySelect.addEventListener('change', (e) => {
+    const selectedTimezone = e.target.value;
+    if (selectedTimezone) {
+        addExtraCity(selectedTimezone);
+    } else {
+        cities.pop();
+        timezones.pop();
+    }
+    updateTimes();
+    saveSettings();
+});
+
+loadSettings();
+updateTimes();
+setInterval(updateTimes, 60000);
+
+// Check for system dark mode preference
+if (window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+    document.body.classList.add('dark-mode');
+}
+
+// Listen for changes to color scheme preferences
+window.matchMedia('(prefers-color-scheme: dark)').addEventListener('change', e => {
+    if (!darkModeOverride) {
+        document.body.classList.toggle('dark-mode', e.matches);
+    }
+});
