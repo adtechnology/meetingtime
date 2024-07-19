@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Time Comparison - Compare Times Across the Globe</title>
     <meta name="description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
-    <meta name="keywords" content="world time, time comparison, compare time, global time, time zones">
+
 
     <!-- Open Graph Tags for Social Media -->
     <meta property="og:title" content="World Time Comparison - Compare Times Across the Globe">
@@ -14,10 +14,9 @@
     <meta property="og:url" content="http://adtechnology.github.io/meetingtime/">
     <meta property="og:type" content="website">
 
-
     <link rel="preload" href="/meetingtime/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="preload" href="/meetingtime/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
-    <link rel="stylesheet" href="static/css/styles.min.css">
+    <link rel="stylesheet" href="/meetingtime/static/css/styles.min.css">
     <style>
         .options {
             min-height: 50px;
@@ -72,11 +71,11 @@
 <div class="local-time" id="localTimeClock">
     <span id="localTimeText"></span>
 </div>
-<script src="static/js/script.min.js"></script>
+<script src="/meetingtime/static/js/script.min.js"></script>
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/meetingtime/service-worker.min.js')
+            navigator.serviceWorker.register('/meetingtime/service-worker.js')
                 .then(registration => {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, error => {
