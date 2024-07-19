@@ -6,15 +6,17 @@
     <title>World Time Comparison - Compare Times Across the Globe</title>
     <meta name="description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
     <meta name="keywords" content="world time, time comparison, compare time, global time, time zones">
-    <meta name="author" content="Your Name">
 
     <!-- Open Graph Tags for Social Media -->
     <meta property="og:title" content="World Time Comparison - Compare Times Across the Globe">
     <meta property="og:description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
     <meta property="og:image" content="path_to_screenshot_image.png">
-    <meta property="og:url" content="https://adtechnology.github.io/meetingtime/">
+    <meta property="og:url" content="http://adtechnology.github.io/meetingtime/">
     <meta property="og:type" content="website">
 
+
+    <link rel="preload" href="/meetingtime/fonts/Poppins-Regular.ttf" as="font" type="font/ttf" crossorigin="anonymous">
+    <link rel="preload" href="/meetingtime/fonts/Poppins-Bold.ttf" as="font" type="font/ttf" crossorigin="anonymous">
     <link rel="stylesheet" href="static/css/styles.min.css">
     <style>
         .options {
@@ -22,6 +24,10 @@
         }
         .local-time {
             min-height: 40px;
+        }
+        /* Ensure fonts are loaded and space is reserved */
+        .city-time {
+            min-height: 50px;
         }
     </style>
 </head>
@@ -34,13 +40,14 @@
         <h2>Compare Times Across the Globe</h2>
         <div id="cityTimes"></div>
         <div class="slider-container">
-            <span class="slider-label">Adjust Time</span>
+            <label class="slider-label" for="timeSlider">Adjust Time</label>
             <input type="range" id="timeSlider" min="-720" max="720" value="0" step="1">
         </div>
         <div class="options">
             <button id="resetButton">Reset to Current Time</button>
+            <label for="extraCity">Add Extra City</label>
             <select id="extraCity">
-                <option value="">Add Extra City</option>
+                <option value="">Select a City</option>
             </select>
         </div>
         <div class="toggle-container">
