@@ -1,11 +1,11 @@
 const CACHE_NAME = 'meetingtime-cache-v1';
 const urlsToCache = [
-    '/',
-    '/index.html',
-    '/static/css/styles.min.css',
-    '/static/js/script.min.js',
-    '/fonts/Poppins-Regular.ttf',
-    '/fonts/Poppins-Bold.ttf'
+    '/meetingtime/',
+    '/meetingtime/index.html',
+    '/meetingtime/static/css/styles.min.css',
+    '/meetingtime/static/js/script.min.js',
+    '/meetingtime/fonts/Poppins-Regular.ttf',
+    '/meetingtime/fonts/Poppins-Bold.ttf'
 ];
 
 self.addEventListener('install', event => {

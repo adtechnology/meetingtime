@@ -69,7 +69,7 @@
 <script>
     if ('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/meetingtime/service-worker.js')
+            navigator.serviceWorker.register('/meetingtime/service-worker.min.js')
                 .then(registration => {
                     console.log('ServiceWorker registration successful with scope: ', registration.scope);
                 }, error => {
