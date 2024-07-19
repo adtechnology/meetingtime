@@ -20,11 +20,8 @@ World Time Comparison is a web application that allows users to compare the curr
    ```sh
    git clone https://github.com/adtechnology/meetingtime.git
    ```
-2. Navigate to the project directory:
-   ```sh
-   cd world-time-comparison
-   ```
-3. Open `index.html` in your preferred web browser.
+
+2. Open `index.html` in your preferred web browser.
 
 ## Usage
 
