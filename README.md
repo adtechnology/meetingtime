@@ -18,7 +18,7 @@ World Time Comparison is a web application that allows users to compare the curr
 
 1. Clone the repository:
    ```sh
-   git clone https://github.com/yourusername/world-time-comparison.git
+   git clone https://github.com/adtechnology/meetingtime.git
    ```
 2. Navigate to the project directory:
    ```sh
