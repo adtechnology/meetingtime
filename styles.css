@@ -1,3 +1,17 @@
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Regular.ttf') format('truetype');
+    font-weight: 400;
+    font-style: normal;
+}
+
+@font-face {
+    font-family: 'Poppins';
+    src: url('fonts/Poppins-Bold.ttf') format('truetype');
+    font-weight: 600;
+    font-style: normal;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     background-color: #f9fafb;
@@ -5,10 +19,13 @@ body {
     margin: 0;
     padding: 20px;
     transition: background-color 0.3s, color 0.3s;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .container {
-    max-width: 600px;
+    max-width: 800px;
     margin: 0 auto;
     background: #ffffff;
     padding: 20px;
@@ -17,10 +34,22 @@ body {
     transition: background-color 0.3s, box-shadow 0.3s;
 }
 
+header, main, footer {
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
 h1 {
     text-align: center;
     font-weight: 600;
     color: #111827;
+}
+
+h2 {
+    text-align: center;
+    font-weight: 400;
+    color: #333;
 }
 
 #cityTimes {
@@ -178,17 +207,25 @@ input:checked + .slider:before {
 }
 
 body.dark-mode {
-    background-color: #282a36;
+    background-color: #1e1e1e;
     color: #f8f8f2;
 }
 
 body.dark-mode .container {
-    background: #44475a;
+    background: #282a36;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
+body.dark-mode header h1 {
+    color: #ffffff;
+}
+
+body.dark-mode main h2 {
+    color: #ffffff;
+}
+
 body.dark-mode .city-time {
-    background: #6272a4;
+    background: #44475a;
     color: #f8f8f2;
 }
 
@@ -216,7 +253,7 @@ body.dark-mode .options button:hover {
 }
 
 body.dark-mode .options select {
-    background: #6272a4;
+    background: #44475a;
     color: #f8f8f2;
 }
 

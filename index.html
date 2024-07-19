@@ -3,40 +3,58 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>World Time Comparison</title>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600&display=swap" rel="stylesheet">
+    <title>World Time Comparison - Compare Times Across the Globe</title>
+    <meta name="description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
+    <meta name="keywords" content="world time, time comparison, compare time, global time, time zones">
+    <meta name="author" content="Your Name">
+
+    <!-- Open Graph Tags for Social Media -->
+    <meta property="og:title" content="World Time Comparison - Compare Times Across the Globe">
+    <meta property="og:description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
+    <meta property="og:image" content="img.png">
+    <meta property="og:url" content="https://adtechnology.github.io/meetingtime/">
+    <meta property="og:type" content="website">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 <body>
-<div class="container">
+<header>
     <h1>World Time Comparison</h1>
-    <div id="cityTimes"></div>
-    <div class="slider-container">
-        <span class="slider-label">-12h</span>
-        <input type="range" id="timeSlider" min="-720" max="720" value="0" step="1">
-        <span class="slider-label">+12h</span>
-    </div>
-    <div class="options">
-        <button id="resetButton">Reset to Current Time</button>
-        <select id="extraCity">
-            <option value="">Add Extra City</option>
-        </select>
-    </div>
-    <div class="toggle-container">
-        <span class="toggle-label">24-hour format</span>
-        <label class="toggle">
-            <input type="checkbox" id="formatToggle">
-            <span class="slider"></span>
-        </label>
-    </div>
-    <div class="toggle-container">
-        <span class="toggle-label">Override System Dark Mode</span>
-        <label class="toggle">
-            <input type="checkbox" id="darkModeToggle">
-            <span class="slider"></span>
-        </label>
-    </div>
-</div>
+</header>
+<main>
+    <section id="comparison">
+        <h2>Compare Times Across the Globe</h2>
+        <div id="cityTimes"></div>
+        <div class="slider-container">
+            <span class="slider-label">-12h</span>
+            <input type="range" id="timeSlider" min="-720" max="720" value="0" step="1">
+            <span class="slider-label">+12h</span>
+        </div>
+        <div class="options">
+            <button id="resetButton">Reset to Current Time</button>
+            <select id="extraCity">
+                <option value="">Add Extra City</option>
+            </select>
+        </div>
+        <div class="toggle-container">
+            <label class="toggle-label" for="formatToggle">24-hour format</label>
+            <label class="toggle">
+                <input type="checkbox" id="formatToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+        <div class="toggle-container">
+            <label class="toggle-label" for="darkModeToggle">Override System Dark Mode</label>
+            <label class="toggle">
+                <input type="checkbox" id="darkModeToggle">
+                <span class="slider"></span>
+            </label>
+        </div>
+    </section>
+</main>
+<footer>
+    <p>&copy; 22024.  All rights reserved.</p>
+</footer>
 <div class="local-time" id="localTimeClock">
     <span id="localTimeText"></span>
 </div>
