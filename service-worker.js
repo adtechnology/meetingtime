@@ -1,8 +1,9 @@
 const CACHE_NAME = 'meetingtime-cache-v1';
 const urlsToCache = [
     '/',
-    '/styles.min.css',
-    '/script.min.js',
+    '/index.html',
+    '/static/css/styles.min.css',
+    '/static/js/script.min.js',
     '/fonts/Poppins-Regular.ttf',
     '/fonts/Poppins-Bold.ttf'
 ];
