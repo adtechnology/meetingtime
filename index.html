@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>World Time Comparison - Compare Times Across the Globe</title>
     <meta name="description" content="World Time Comparison is a web application that allows users to compare the current time in multiple cities around the world.">
-
+    <meta name="keywords" content="world time, time comparison, compare time, global time, time zones">
 
     <!-- Open Graph Tags for Social Media -->
     <meta property="og:title" content="World Time Comparison - Compare Times Across the Globe">
@@ -28,6 +28,9 @@
         .city-time {
             min-height: 50px;
         }
+        .select-container {
+            min-height: 50px; /* Reserve space for select element */
+        }
     </style>
 </head>
 <body>
@@ -44,10 +47,12 @@
         </div>
         <div class="options">
             <button id="resetButton">Reset to Current Time</button>
-            <label for="extraCity">Add Extra City</label>
-            <select id="extraCity">
-                <option value="">Select a City</option>
-            </select>
+            <div class="select-container">
+                <label for="extraCity">Add Extra City</label>
+                <select id="extraCity">
+                    <option value="">Select a City</option>
+                </select>
+            </div>
         </div>
         <div class="toggle-container">
             <label class="toggle-label" for="formatToggle">24-hour format</label>
